@@ -39,7 +39,7 @@ onBeforeMount(() => {
   >
     <CountryCard
       v-for="item in countryData"
-      :key="item.name.official"
+      :key="item.region"
       :url="item.flags.svg"
       :country-name="item.name.official"
     ></CountryCard>
