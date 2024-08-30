@@ -30,10 +30,25 @@ onBeforeMount(() => {
       console.log(error);
     });
 });
+
+function countryCall(countryName) {
+  fetch(`https://restcountries.com/v3.1/${countryName}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      countryData = data;
+      console.log(countryData);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 </script>
 
 <template>
   <h1 class="text-3xl font-bold underline">Hello world!</h1>
+
   <div
     class="grid grid-cols-1 w-100vh items-center justify-center gap-2 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3 xl:lg:grid-cols-4"
   >
@@ -42,6 +57,9 @@ onBeforeMount(() => {
       :key="item.region"
       :url="item.flags.svg"
       :country-name="item.name.official"
+      :population="item.population"
+      :capital="item.capital"
+      :region="item.region"
     ></CountryCard>
   </div>
 </template>
