@@ -21,7 +21,7 @@ console.log();
     </div>
     <div class="flex flex-col items-start gap-2 w-full">
       <p class="text-left truncate">Population: {{ props.population }}</p>
-      <p class="text-left truncate">Capital: {{ props.capital[0] }}</p>
+      <p class="text-left truncate">Capital: {{ props.capital? props.capital[0]: "" }}</p>
       <p class="text-left truncate">Region: {{ props.region }}</p>
     </div>
   </div>

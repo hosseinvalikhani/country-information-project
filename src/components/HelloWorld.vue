@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
+import { onMounted, ref } from "vue";
 import CountryCard from "./countryCard.vue";
 interface Country {
   name: {
@@ -17,32 +17,24 @@ interface Country {
 
 let countryData = ref<Country[]>([]);
 
-onBeforeMount(() => {
+onMounted(() => {
   fetch("https://restcountries.com/v3.1/all")
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      countryData = data;
+      countryData.value = data;
       console.log(countryData);
+      console.log(countryData.value)
+
     })
     .catch(function (error) {
       console.log(error);
     });
 });
 
-function countryCall(countryName) {
-  fetch(`https://restcountries.com/v3.1/${countryName}`)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      countryData = data;
-      console.log(countryData);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+function countryCall() {
+  console.log(countryName);
 }
 </script>
 
@@ -54,7 +46,7 @@ function countryCall(countryName) {
   >
     <CountryCard
       v-for="item in countryData"
-      :key="item.region"
+      :key="index"
       :url="item.flags.svg"
       :country-name="item.name.official"
       :population="item.population"
